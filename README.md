@@ -86,98 +86,89 @@ Perfect for recurring reports where the data always lands in your inbox.
 
    ```m
    = Binary.FromText([Binary], BinaryEncoding.Base64)
-// This turns the Base64 text back into real file content.
-// You can rename this column to something like Content.
-//
-// 3.3.3 Turn the file content into a table
-//
-// If your attachments are CSV files, add another Custom Column:
-//
-// = Csv.Document([Content])
-//
-//
-// If your attachments are Excel (.xlsx) files, use:
-//
-// = Excel.Workbook([Content])
-//
-// 3.3.4 Expand and clean
-//
-// Expand the new table column to get the actual data columns
-//
-// Rename columns
-//
-// Set correct data types
-//
-// Do any usual cleaning / filtering you need
-//
-// Load the final query into a worksheet as a table
-//
-// At this point, the pipeline is wired up.
-//
-// 4. How to use (after setup)
-//
-// Once everything above is configured, day-to-day usage is simple.
-//
-// 4.1 Send / receive new files
-//
-// Keep using the same Gmail account
-//
-// Use consistent subjects (for example: sales data nagpur, sales data delhi)
-//
-// Attach CSV/Excel files in the same structure you built the query for
-//
-// 4.2 Refresh the pipeline in Excel
-//
-// Open the Excel file that contains this query
-//
-// Go to Data → Refresh All
-//
-// Power Query will then:
-//
-// Call the Apps Script Web App
-//
-// Read the latest Gmail attachments
-//
-// Decode them back to binary
-//
-// Rebuild and clean the combined data table
-//
-// 4.3 Use the refreshed data
-//
-// Build / update pivot tables, charts, dashboards, etc. on top of the table
-//
-// Whenever new files arrive in Gmail, just Refresh All again
-//
-// 5. Files in this repo
-//
-// Code.gs – Google Apps Script that reads Gmail and returns JSON
-//
-// MailETL-Gmail-Attachment-Data-Pipeline.xlsx – Excel file with the Power Query steps
-//
-// screenshots/ – Images showing Gmail, Apps Script, Power Query and the final Excel table
-//
-// README.md – This documentation
-//
-// 6. Privacy & safety checklist
-//
-// If you make this repo public:
-//
-// Remove real email IDs, names and any sensitive data from screenshots
-//
-// Use dummy / sample data instead of real production data
-//
-// Do not commit your real Web App URL if it’s open to Anyone
-//
-// Consider restricting or disabling the Web App deployment after testing
-//
-// 7. Possible improvements
-//
-// Filter by Gmail label (only read mails with a specific label)
-//
-// Support both CSV and XLSX in one unified pipeline
-//
-// Add date filters in the Apps Script API
-//
-// Build a Power BI / advanced Excel dashboard on top of the final table
-//
-// Built to turn “Gmail full of attachments” into a reusable data pipeline with minimal manual work.
+This turns the Base64 text back into real file content. You can rename this column to something like `Content`.
+
+### 3.3.3 Turn the file content into a table
+
+If your attachments are **CSV** files, add another Custom Column:
+
+```m
+= Csv.Document([Content])
+If your attachments are Excel (.xlsx) files, use:
+
+m
+Copy code
+= Excel.Workbook([Content])
+3.3.4 Expand and clean
+Expand the new table column to get the actual data columns
+
+Rename columns
+
+Set correct data types
+
+Do any usual cleaning / filtering you need
+
+Load the final query into a worksheet as a table
+
+At this point, the pipeline is wired up.
+
+4. How to use (after setup)
+Once everything above is configured, day-to-day usage is simple.
+
+4.1 Send / receive new files
+Keep using the same Gmail account
+
+Use consistent subjects (for example: sales data nagpur, sales data delhi)
+
+Attach CSV/Excel files in the same structure you built the query for
+
+4.2 Refresh the pipeline in Excel
+Open the Excel file that contains this query
+
+Go to Data → Refresh All
+
+Power Query will then:
+
+Call the Apps Script Web App
+
+Read the latest Gmail attachments
+
+Decode them back to binary
+
+Rebuild and clean the combined data table
+
+4.3 Use the refreshed data
+Build / update pivot tables, charts, dashboards, etc. on top of the table
+
+Whenever new files arrive in Gmail, just Refresh All again
+
+5. Files in this repo
+Code.gs – Google Apps Script that reads Gmail and returns JSON
+
+MailETL-Gmail-Attachment-Data-Pipeline.xlsx – Excel file with the Power Query steps
+
+screenshots/ – Images showing Gmail, Apps Script, Power Query and the final Excel table
+
+README.md – This documentation
+
+6. Privacy & safety checklist
+If you make this repo public:
+
+Remove real email IDs, names and any sensitive data from screenshots
+
+Use dummy / sample data instead of real production data
+
+Do not commit your real Web App URL if it’s open to Anyone
+
+Consider restricting or disabling the Web App deployment after testing
+
+7. Possible improvements
+Filter by Gmail label (only read mails with a specific label)
+
+Support both CSV and XLSX in one unified pipeline
+
+Add date filters in the Apps Script API
+
+Build a Power BI / advanced Excel dashboard on top of the final table
+
+Built to turn “Gmail full of attachments” into a reusable data pipeline with minimal manual work.
