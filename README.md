@@ -1,6 +1,8 @@
-# Gmail to Power Query Automation (Using Google Apps Script)
+ # MailETL – Gmail Attachment Data Pipeline
 
-This project creates a workflow to fetch Gmail data (including attachments) using Google Apps Script and load it into Excel through Power Query.
+This project automates a very common boring task:
+
+> Take Excel/CSV attachments from Gmail and turn them into a clean, refreshable Excel table using Google Apps Script + Power Query.
 
 ---
 
