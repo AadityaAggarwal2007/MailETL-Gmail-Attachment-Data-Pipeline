@@ -6,11 +6,13 @@ This project creates a workflow to fetch Gmail data (including attachments) usin
 
 ## 1. Enable IMAP in Gmail
 
+Before connecting anything, IMAP must be enabled.
+
 1. Open Gmail  
-2. Go to **Settings → See all settings**  
-3. Open **Forwarding and POP/IMAP**  
-4. Under **IMAP access**, select **Enable IMAP**  
-5. Click **Save Changes**
+2. Go to Settings → See all settings  
+3. Open the “Forwarding and POP/IMAP” tab  
+4. Under “IMAP access”, select **Enable IMAP**  
+5. Save the changes
 
 ---
 
@@ -18,47 +20,60 @@ This project creates a workflow to fetch Gmail data (including attachments) usin
 
 1. Open Google Apps Script  
 2. Click **New Project**  
-3. Paste your script  
-4. Click **Deploy → New deployment**  
-5. Under **Select type**, choose **Web app**  
-6. Set **Who has access?** → **Anyone**  
-7. Click **Deploy**, authorize, and allow  
-8. Copy the generated **Web App URL**
-
-Power Query will use this URL to fetch Gmail data.
+3. Paste the script code  
+4. Click **Deploy** → **New deployment**  
+5. Under “Select type”, choose **Web app**  
+6. Set “Who has access?” → **Anyone**  
+7. Click **Deploy**, then authorize the permissions  
+8. Copy the **Web App URL**  
+   (Power Query will use this URL as an API endpoint)
 
 ---
 
-## 3. Load Gmail Data into Power Query
+## 3. Connect Power Query to Gmail Data
 
-### A. Import the API data  
-Excel → **Data → From Web**  
-Paste your Web App URL.
+### Step A: Import the Web App URL  
+Excel → **Data** → **From Web**  
+Paste the Web App URL.
 
-### B. Convert to table  
+### Step B: Convert the result into a table  
 Power Query → **To Table**
 
-### C. Expand the list  
-Use the expand icon to bring all message fields (Date, From, Subject, etc.).
+### Step C: Expand the data  
+Use the expand icon to bring all fields into the table.
 
-### D. Filter the required emails  
-Use Subject, From, or MIME type to narrow down the data.  
+### Step D: Filter relevant emails  
+Filter using Subject, From, or MIME type.  
 Remove unnecessary columns.
 
-### E. (Optional) Extract attachment content  
-If your script already returns structured data in JSON format  
-(e.g., attachment name, type, or decoded content),  
-Power Query will automatically display it after expansion.  
-No binary conversion or CSV decoding steps are included here.
+### Step E: Decode Base64 attachments  
+Add a custom column:
 
-### F. Clean and shape the data  
-Rename columns, remove null records, set correct data types.
+Binary.FromText([Binary], BinaryEncoding.Base64)
+
+sql
+Copy code
+
+### Step F: Convert the binary into a CSV table  
+Add another custom column:
+
+Csv.Document([Content])
+
+yaml
+Copy code
+
+### Step G: Expand the CSV  
+Expand the generated table to view actual CSV data.
+
+### Step H: Clean and transform  
+Rename columns, change data types, remove nulls, and complete your transformations.
 
 ---
 
 ## Result
 
-A refreshable Gmail → Excel pipeline using Google Apps Script as a bridge.  
-Each refresh pulls your latest Gmail data directly into Power Query — ready for analysis, filtering, or reporting.
+You now have a refreshable pipeline that pulls emails and CSV attachments straight from Gmail into Excel via Power Query.
+
+Refreshing the workbook updates everything automatically whenever new emails arrive.
 
 ---
