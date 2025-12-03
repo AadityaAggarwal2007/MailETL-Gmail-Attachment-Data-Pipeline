@@ -79,7 +79,6 @@ You now have a refreshable pipeline that pulls emails and CSV attachments straig
 Refreshing the workbook updates everything automatically whenever new emails arrive.
 
 ---
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/86b66d8e-d2be-4788-ae53-f36b9fa69fd6" />
 
 <img width="2940" height="956" alt="image" src="https://github.com/user-attachments/assets/8e80cae5-1b71-4882-83ee-380cba14befb" />
 
